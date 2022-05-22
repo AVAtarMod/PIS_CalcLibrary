@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1972
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcLibrary", "CalcLibrary\CalcLibrary.csproj", "{D2A5DBB0-9D45-430C-A212-EBF6D110E2AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcLibrary", "CalcLibrary\CalcLibrary.csproj", "{D2A5DBB0-9D45-430C-A212-EBF6D110E2AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcLibraryTest", "CalcLibraryTest\CalcLibraryTest.csproj", "{802C15B5-5C18-4989-BB1D-61EE3D73EDC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcLibraryTest", "CalcLibraryTest\CalcLibraryTest.csproj", "{802C15B5-5C18-4989-BB1D-61EE3D73EDC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions", "..\..\Library\Extensions\Extensions.csproj", "{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D2A5DBB0-9D45-430C-A212-EBF6D110E2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -46,17 +43,23 @@ Global
 		{802C15B5-5C18-4989-BB1D-61EE3D73EDC2}.Release|x64.Build.0 = Release|Any CPU
 		{802C15B5-5C18-4989-BB1D-61EE3D73EDC2}.Release|x86.ActiveCfg = Release|Any CPU
 		{802C15B5-5C18-4989-BB1D-61EE3D73EDC2}.Release|x86.Build.0 = Release|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Debug|x64.Build.0 = Debug|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Debug|x86.Build.0 = Debug|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Release|x64.ActiveCfg = Release|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Release|x64.Build.0 = Release|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Release|x86.ActiveCfg = Release|Any CPU
-		{BFE9D6EA-A407-41CD-8131-6098D81AF1A1}.Release|x86.Build.0 = Release|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Debug|x64.Build.0 = Debug|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Debug|x86.Build.0 = Debug|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Release|x64.ActiveCfg = Release|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Release|x64.Build.0 = Release|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Release|x86.ActiveCfg = Release|Any CPU
+		{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0005F94B-508F-4EB1-AE4F-7F44D0C160CE}
 	EndGlobalSection
 EndGlobal
