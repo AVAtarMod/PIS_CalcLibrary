@@ -1,10 +1,9 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using Extensions;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Globalization;
-
-using Extensions;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace CalcLibrary
 {
@@ -13,7 +12,7 @@ namespace CalcLibrary
     public
 #endif
     delegate double OperationDelegate(double x, double y);
-    static public class Calc
+    public static class Calc
     {
 
 #if DEBUG
@@ -35,13 +34,25 @@ namespace CalcLibrary
 #endif
         static string[] GetOperands(string input)
         {
-            MatchCollection collection = _operationRegex.Matches(input);
+            Match[] matches = GetMatches(_operationRegex, input);
 
-            string[] result = input.Split(collection.Select(_convertMatchToString).ToArray<string>(), StringSplitOptions.None);
+            string[] result = input.Split(matches.Select(_convertMatchToString).ToArray(), StringSplitOptions.None);
 
             DebugConsole.WriteLine($"Operands: `{result[0]}`,`{result[1]}`");
 
             return result;
+        }
+
+        private static Match[] GetMatches(Regex regex, string inputString)
+        {
+            MatchCollection collection = regex.Matches(inputString);
+            Match[] matches = new Match[collection.Count];
+            for (int i = 0; i < collection.Count; i++)
+            {
+                matches[i] = collection[i];
+            }
+            collection = null;
+            return matches;
         }
 
 #if DEBUG
@@ -50,11 +61,11 @@ namespace CalcLibrary
         static string GetOperation(string input)
         {
             input = input.Replace(" ", string.Empty);
-            MatchCollection collection = _operationRegex.Matches(input);
+            Match[] collection = GetMatches(_operationRegex, input);
 
             DebugConsole.WriteLine($"Operation: `{string.Join(" ", collection.Select(_convertMatchToString))}`");
 
-            if (collection.Count > 1)
+            if (collection.Length > 1)
                 throw new ArgumentException("Bad expression format, there is must be one operation per expression", "input");
 
             return collection[0].Value;
