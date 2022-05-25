@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcLibrary", "CalcLibrary\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcLibraryTest", "CalcLibraryTest\CalcLibraryTest.csproj", "{802C15B5-5C18-4989-BB1D-61EE3D73EDC2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions", "..\..\Library\Extensions\Extensions.csproj", "{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Extensions", "..\..\..\Library\Extensions\Extensions.csproj", "{9AD1BE41-9D58-4E2B-9C4F-9812BC2FEF7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{8252A467-3DF7-4B3B-AC5C-E0447ADD9430}"
 EndProject
