@@ -36,9 +36,16 @@ namespace CalcLibrary
         {
             Match[] matches = GetMatches(_operationRegex, input);
 
-            string[] result = input.Split(matches.Select(_convertMatchToString).ToArray(), StringSplitOptions.None);
+            string[] result = input.Split(matches.Select(_convertMatchToString).ToArray(), StringSplitOptions.RemoveEmptyEntries);
 
-            DebugConsole.WriteLine($"Operands: `{result[0]}`,`{result[1]}`");
+            try
+            {
+                DebugConsole.WriteLine($"Operands: `{result[0]}`,`{result[1]}`");
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new InvalidOperandsException("В выражении недостаточно операндов/чисел (должно быть 2).");
+            }
 
             return result;
         }
@@ -66,7 +73,7 @@ namespace CalcLibrary
             DebugConsole.WriteLine($"Operation: `{string.Join(" ", collection.Select(_convertMatchToString))}`");
 
             if (collection.Length > 1)
-                throw new ArgumentException("Bad expression format, there is must be one operation per expression", "input");
+                throw new ArgumentException("Неверный формат выражения - в нем должен быть один оператор.");
 
             return collection[0].Value;
         }
@@ -75,7 +82,16 @@ namespace CalcLibrary
             string[] array = GetOperands(s);
             CultureInfo real = GetCultureInfo(array);
             CultureInfo.CurrentCulture = real;
-            double[] operands = Array.ConvertAll<string, double>(array, i => double.Parse(i));
+            double[] operands;
+
+            try
+            {
+                operands = Array.ConvertAll<string, double>(array, i => double.Parse(i));
+            }
+            catch (Exception)
+            {
+                throw new ParsingException("Неверный формат числа.");
+            }
 
             string op = GetOperation(s);
 
@@ -104,14 +120,14 @@ namespace CalcLibrary
             {
                 MatchCollection collection = separatorRegex.Matches(i);
                 if (collection.Count > 1)
-                    throw new FormatException("Invalid number format");
+                    throw new FormatException("Ошибка: Неверный формат числа. Все числа должны иметь одинаковый разделитель  дробной и целой части в 1 символ длиной");
                 else if (collection.Count == 1 && collection[0].Value.Length == 1)
                 {
                     tmp.NumberDecimalSeparator = collection[0].Value;
                     if (first)
                         info.NumberFormat.NumberDecimalSeparator = tmp.NumberDecimalSeparator;
                     else if (tmp.NumberDecimalSeparator != info.NumberFormat.NumberDecimalSeparator)
-                        throw new FormatException("All numbers in expression must have same decimal separator");
+                        throw new FormatException("Неверный формат числа. Все числа должны иметь одинаковый разделитель дробной и целой части и вид *...[Р*...*] где * - цифра (0-9), Р - разделитель, [] - необязательная часть. Пример: 23");
                     first = false;
                 }
             }
