@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BinCalc</name>
+    </assembly>
+    <members>
+        <member name="T:BinCalc.BCalc">
+            <summary>
+            Class BCalc for binary operation for integers
+            </summary>
+        </member>
+        <member name="M:BinCalc.BCalc.DoBinOperation(System.String)">
+            <summary>
+            Method calculate binary operation: or, and, xor
+            </summary>
+            <param name="s">
+            s - string for calculate
+            </param>
+            <returns>
+            result of calculate
+            </returns>
+            <example>
+            <code>
+            string s = BCalc.DoBinOperation("23|4");// s = "23"
+            string s = BCalc.DoBinOperation("23^4");// s = "19"
+            </code>
+            </example>
+        </member>
+    </members>
+</doc>
