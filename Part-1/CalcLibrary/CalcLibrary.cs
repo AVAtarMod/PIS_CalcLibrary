@@ -8,13 +8,24 @@ using System.Text.RegularExpressions;
 namespace CalcLibrary
 {
 
-#if DEBUG
-    public
-#endif
-    delegate double OperationDelegate(double x, double y);
+    /// <summary>
+    /// Binary operator handler
+    /// </summary>
+    /// <param name="x">First operand</param>
+    /// <param name="y">Second operand</param>
+    /// <returns>Result of computation operation</returns>
+    /// <example>OperationDelegate a = (x,y)=> x + y; // handles sum operation</example>
+    public delegate double OperationDelegate(double x, double y);
+
+    /// <summary>
+    /// Class Calc for calculation of simple expressions
+    /// </summary>
     public static class Calc
     {
 
+        /// <summary>
+        /// Operation storage
+        /// </summary>
 #if DEBUG
         public
 #endif
@@ -28,6 +39,22 @@ namespace CalcLibrary
         private const string _operationPattern = @"(?!-\d)[^\d,\.]";
         private static readonly Func<Match, int, string> _convertMatchToString = (match, i) => match.Value;
         private static readonly Regex _operationRegex = new Regex(_operationPattern);
+
+        /// <summary>
+        /// Add operation to calculator for support of calculation with this operator 
+        /// </summary>
+        /// <param name="operationChar">Operation symbol</param>
+        /// <param name="operation">Operation handler</param>
+        /// <example>AddOperation("@",(x,y)=>0)</example>
+        /// <remarks> You can add only one operation per operation Char</remarks>
+        /// <exception cref="ArgumentException">If operation with operationChar already exist</exception>
+        public static void AddOperation(string operationChar, OperationDelegate operation)
+        {
+            if (!DoubleOperation.ContainsKey(operationChar))
+                DoubleOperation.Add(operationChar, operation);
+            else
+                throw new ArgumentException("Cannot add operation: " + operationChar + " already added");
+        }
 
 #if DEBUG
         public
@@ -77,6 +104,15 @@ namespace CalcLibrary
 
             return collection[0].Value;
         }
+
+        /// <summary>
+        /// Calculate specified expression. Supported operations: +,-,*,/ and others if you add its with AddOperation
+        /// </summary>
+        /// <param name="s">expression</param>
+        /// <returns>result of computation in string format</returns>
+        /// <example>string s = DoOperation("1+2");// 3 </example>
+        /// <exception cref="ParsingException"></exception>
+        /// <exception cref="FormatException">If operand or expression has invalid format</exception>
         public static string DoOperation(string s)
         {
             string[] array = GetOperands(s);
