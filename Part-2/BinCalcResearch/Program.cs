@@ -28,6 +28,10 @@ namespace BinCalcResearch
             parameters = parameters.Remove(parameters.Length - 3);
             Console.WriteLine("\t" + method.ReturnType.Name + " " + method.Name + " (" + parameters + ")");
 
+            Console.WriteLine("Создаем объект...");
+            object obj = Activator.CreateInstance(assemblyTypes[0]);
+            string s = (string)method.Invoke(obj, new object[] { "23|4" });
+            Console.WriteLine("23|4 => " + s);
             Console.ReadKey();
         }
     }
