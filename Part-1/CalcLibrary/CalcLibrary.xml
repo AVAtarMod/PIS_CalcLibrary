@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CalcLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:CalcLibrary.OperationDelegate">
+            <summary>
+            Binary operator handler
+            </summary>
+            <param name="x">First operand</param>
+            <param name="y">Second operand</param>
+            <returns>Result of computation operation</returns>
+            <example>OperationDelegate a = (x,y)=> x + y; // handles sum operation</example>
+        </member>
+        <member name="T:CalcLibrary.Calc">
+            <summary>
+            Class Calc for calculation of simple expressions
+            </summary>
+        </member>
+        <member name="F:CalcLibrary.Calc.DoubleOperation">
+            <summary>
+            Operation storage
+            </summary>
+        </member>
+        <member name="M:CalcLibrary.Calc.AddOperation(System.String,CalcLibrary.OperationDelegate)">
+            <summary>
+            Add operation to calculator for support of calculation with this operator 
+            </summary>
+            <param name="operationChar">Operation symbol</param>
+            <param name="operation">Operation handler</param>
+            <example>AddOperation("@",(x,y)=>0)</example>
+            <remarks> You can add only one operation per operation Char</remarks>
+            <exception cref="T:System.ArgumentException">If operation with operationChar already exist</exception>
+        </member>
+        <member name="M:CalcLibrary.Calc.DoOperation(System.String)">
+            <summary>
+            Calculate specified expression. Supported operations: +,-,*,/ and others if you add its with AddOperation
+            </summary>
+            <param name="s">expression</param>
+            <returns>result of computation in string format</returns>
+            <example>string s = DoOperation("1+2");// 3 </example>
+            <exception cref="T:CalcLibrary.ParsingException"></exception>
+            <exception cref="T:System.FormatException">If operand or expression has invalid format</exception>
+        </member>
+    </members>
+</doc>

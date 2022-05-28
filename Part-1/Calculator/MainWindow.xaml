@@ -1,0 +1,37 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="Калькулятор" Height="450" Width="708" FontSize="36" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="63" Margin="10,10,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="36" KeyDown="TextBox_KeyDown" MinWidth="585" Width="587"/>
+        <Button x:Name="ButtonEquals" Content="=" HorizontalAlignment="Right" Margin="0,10,10.333,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickEquals"/>
+        <Button x:Name="ButtonZero" Content="0" HorizontalAlignment="Left" Margin="104,300,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="1" HorizontalAlignment="Left" Margin="104,96,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="2" HorizontalAlignment="Left" Margin="198,96,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="3" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="4" HorizontalAlignment="Left" Margin="104,164,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="5" HorizontalAlignment="Left" Margin="198,164,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="6" HorizontalAlignment="Left" Margin="10,232,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="7" HorizontalAlignment="Left" Margin="104,232,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="8" HorizontalAlignment="Left" Margin="198,232,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="9" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickNumber"/>
+        <Button Content="+" HorizontalAlignment="Right" Margin="0,96,10.333,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_Click"/>
+        <Button Content="*" HorizontalAlignment="Right" Margin="0,96,104.333,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_Click"/>
+        <Button Content="-" HorizontalAlignment="Right" Margin="0,96,198.333,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_Click"/>
+        <Button x:Name="ButtonDivision" Content="/" HorizontalAlignment="Right" Margin="0,96,292.333,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_Click"/>
+        <Button Content="Очистить" HorizontalAlignment="Right" Margin="0,164,198.333,0" VerticalAlignment="Top" Width="183" Height="63" FontSize="36" Click="Button_ClickClear"/>
+        <Button Content="&lt;-" HorizontalAlignment="Right" Margin="0,164,104.333,0" VerticalAlignment="Top" Width="89" Height="63" FontSize="36" Click="Button_ClickRemoveLast"/>
+        <StatusBar x:Name="StatusBar" HorizontalAlignment="Left" Height="43" Margin="0,0,-91.667,-0.333" Width="793" VerticalAlignment="Bottom" FontSize="36">
+            <Label Content="Статус:" FontSize="20"/>
+            <Label x:Name="StatusLabel" Content="" FontSize="20" Width="695"/>
+        </StatusBar>
+
+    </Grid>
+</Window>

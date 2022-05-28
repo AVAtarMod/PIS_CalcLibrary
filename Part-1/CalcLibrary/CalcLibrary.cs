@@ -8,13 +8,24 @@ using System.Text.RegularExpressions;
 namespace CalcLibrary
 {
 
-#if DEBUG
-    public
-#endif
-    delegate double OperationDelegate(double x, double y);
+    /// <summary>
+    /// Binary operator handler
+    /// </summary>
+    /// <param name="x">First operand</param>
+    /// <param name="y">Second operand</param>
+    /// <returns>Result of computation operation</returns>
+    /// <example>OperationDelegate a = (x,y)=> x + y; // handles sum operation</example>
+    public delegate double OperationDelegate(double x, double y);
+
+    /// <summary>
+    /// Class Calc for calculation of simple expressions
+    /// </summary>
     public static class Calc
     {
 
+        /// <summary>
+        /// Operation storage
+        /// </summary>
 #if DEBUG
         public
 #endif
@@ -29,6 +40,22 @@ namespace CalcLibrary
         private static readonly Func<Match, int, string> _convertMatchToString = (match, i) => match.Value;
         private static readonly Regex _operationRegex = new Regex(_operationPattern);
 
+        /// <summary>
+        /// Add operation to calculator for support of calculation with this operator 
+        /// </summary>
+        /// <param name="operationChar">Operation symbol</param>
+        /// <param name="operation">Operation handler</param>
+        /// <example>AddOperation("@",(x,y)=>0)</example>
+        /// <remarks> You can add only one operation per operation Char</remarks>
+        /// <exception cref="ArgumentException">If operation with operationChar already exist</exception>
+        public static void AddOperation(string operationChar, OperationDelegate operation)
+        {
+            if (!DoubleOperation.ContainsKey(operationChar))
+                DoubleOperation.Add(operationChar, operation);
+            else
+                throw new ArgumentException("Cannot add operation: " + operationChar + " already added");
+        }
+
 #if DEBUG
         public
 #endif
@@ -36,9 +63,16 @@ namespace CalcLibrary
         {
             Match[] matches = GetMatches(_operationRegex, input);
 
-            string[] result = input.Split(matches.Select(_convertMatchToString).ToArray(), StringSplitOptions.None);
+            string[] result = input.Split(matches.Select(_convertMatchToString).ToArray(), StringSplitOptions.RemoveEmptyEntries);
 
-            DebugConsole.WriteLine($"Operands: `{result[0]}`,`{result[1]}`");
+            try
+            {
+                DebugConsole.WriteLine($"Operands: `{result[0]}`,`{result[1]}`");
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new InvalidOperandsException("В выражении недостаточно операндов/чисел (должно быть 2).");
+            }
 
             return result;
         }
@@ -66,16 +100,34 @@ namespace CalcLibrary
             DebugConsole.WriteLine($"Operation: `{string.Join(" ", collection.Select(_convertMatchToString))}`");
 
             if (collection.Length > 1)
-                throw new ArgumentException("Bad expression format, there is must be one operation per expression", "input");
+                throw new ArgumentException("Неверный формат выражения - в нем должен быть один оператор.");
 
             return collection[0].Value;
         }
+
+        /// <summary>
+        /// Calculate specified expression. Supported operations: +,-,*,/ and others if you add its with AddOperation
+        /// </summary>
+        /// <param name="s">expression</param>
+        /// <returns>result of computation in string format</returns>
+        /// <example>string s = DoOperation("1+2");// 3 </example>
+        /// <exception cref="ParsingException"></exception>
+        /// <exception cref="FormatException">If operand or expression has invalid format</exception>
         public static string DoOperation(string s)
         {
             string[] array = GetOperands(s);
             CultureInfo real = GetCultureInfo(array);
             CultureInfo.CurrentCulture = real;
-            double[] operands = Array.ConvertAll<string, double>(array, i => double.Parse(i));
+            double[] operands;
+
+            try
+            {
+                operands = Array.ConvertAll<string, double>(array, i => double.Parse(i));
+            }
+            catch (Exception)
+            {
+                throw new ParsingException("Неверный формат числа.");
+            }
 
             string op = GetOperation(s);
 
@@ -104,14 +156,14 @@ namespace CalcLibrary
             {
                 MatchCollection collection = separatorRegex.Matches(i);
                 if (collection.Count > 1)
-                    throw new FormatException("Invalid number format");
+                    throw new FormatException("Ошибка: Неверный формат числа. Все числа должны иметь одинаковый разделитель  дробной и целой части в 1 символ длиной");
                 else if (collection.Count == 1 && collection[0].Value.Length == 1)
                 {
                     tmp.NumberDecimalSeparator = collection[0].Value;
                     if (first)
                         info.NumberFormat.NumberDecimalSeparator = tmp.NumberDecimalSeparator;
                     else if (tmp.NumberDecimalSeparator != info.NumberFormat.NumberDecimalSeparator)
-                        throw new FormatException("All numbers in expression must have same decimal separator");
+                        throw new FormatException("Неверный формат числа. Все числа должны иметь одинаковый разделитель дробной и целой части и вид *...[Р*...*] где * - цифра (0-9), Р - разделитель, [] - необязательная часть. Пример: 23");
                     first = false;
                 }
             }
