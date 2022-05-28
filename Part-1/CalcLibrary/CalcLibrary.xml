@@ -33,15 +33,6 @@
             <remarks> You can add only one operation per operation Char</remarks>
             <exception cref="T:System.ArgumentException">If operation with operationChar already exist</exception>
         </member>
-        <member name="M:CalcLibrary.Calc.DoOperation(System.String)">
-            <summary>
-            Calculate specified expression. Supported operations: +,-,*,/ and others if you add its with AddOperation
-            </summary>
-            <param name="s">expression</param>
-            <returns>result of computation in string format</returns>
-            <example>string s = DoOperation("1+2");// 3 </example>
-            <exception cref="T:CalcLibrary.ParsingException"></exception>
-            <exception cref="T:System.FormatException">If operand or expression has invalid format</exception>
-        </member>
+        <!-- Проигнорирован некорректный комментарий XML для члена "M:CalcLibrary.Calc.DoOperation(System.String)" -->
     </members>
 </doc>
